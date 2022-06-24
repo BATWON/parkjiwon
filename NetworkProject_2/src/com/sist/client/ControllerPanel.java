@@ -8,6 +8,7 @@ public class ControllerPanel extends JPanel{
 	public HomeForm hf;
 	public DetailForm df;
 	public ChatForm cf = new ChatForm();
+	public NewsForm nf = new NewsForm();
 	public FoodFindForm mf = new FoodFindForm();
     public ControllerPanel()
     {
@@ -18,6 +19,7 @@ public class ControllerPanel extends JPanel{
     	add("DF",df);
     	add("MF",mf);
     	add("CF",cf);
+    	add("NF",nf);
     }
     
 }

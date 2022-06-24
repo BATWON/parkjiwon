@@ -190,6 +190,8 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 
 			} else if (e.getSource()==menu.foodBtn) {
 				cp.card.show(cp, "MF");
+			} else if (e.getSource()==menu.newsBtn) {
+				cp.card.show(cp, "NF");
 			} else if (e.getSource()==menu.homeBtn) {
 				cp.card.show(cp, "HF");
 			} else if (e.getSource()==cp.mf.btn) {	// 검색 버튼 클릭시
