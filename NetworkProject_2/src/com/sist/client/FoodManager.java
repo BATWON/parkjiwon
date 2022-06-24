@@ -1,14 +1,18 @@
 package com.sist.client;
 
-import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.sist.data.FoodLocationVO;
+import com.sist.data.FoodSystem;
+import com.sist.main.NetworkMain;
 //import com.sist.main.FoodMain;
 public class FoodManager extends JPanel implements MouseListener{
     public PosterCard[] foods=new PosterCard[15];
@@ -58,19 +62,24 @@ public class FoodManager extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-//		for(int i=0;i<musics.length;i++)
-//		{
-//			if(e.getSource()==musics[i])
-//			{
-//				String title=musics[i].title.getText();
-//				for(int j=0;j<MusicSystem.getList().size();j++)
-//				{
-//					Music m=MusicSystem.getList().get(j);
-//					if(m.getTitle().equals(title))
-//					{
-//						cp.df.album.setText(m.getAlbum());
-//						cp.df.title.setText(m.getTitle());
-//						cp.df.singer.setText(m.getSinger());
+		for(int i=0;i<foods.length;i++)
+		{
+			if(e.getSource()==foods[i])
+			{
+				String title=foods[i].name.getText();
+				for(int j=0;j<FoodSystem.getList().size();j++)
+				{
+					FoodLocationVO m=FoodSystem.getList().get(j);
+					if(m.getName().equals(title))
+					{
+						cp.df.name.setText(m.getName());
+						cp.df.address.setText(m.getAddress());
+						cp.df.tel.setText(m.getTel());
+						cp.df.type.setText(m.getType());
+						cp.df.price.setText(m.getPrice());
+						cp.df.parking.setText(m.getParking());
+						cp.df.time.setText(m.getTime());
+						cp.df.menu.setText(m.getMenu());
 //						String s="";
 //						if(m.getState().equals("유지"))
 //						{
@@ -86,19 +95,19 @@ public class FoodManager extends JPanel implements MouseListener{
 //						}
 //						cp.df.idcrement.setText(s);
 //						cp.df.movie.setText(m.getKey());
-//						try
-//				    	{
-//				    		URL url=new URL("http:"+m.getPoster());
-//				    		Image img=NetworkMain.getImage(new ImageIcon(url), 350, 250);
-//				    		cp.df.posterLa.setIcon(new ImageIcon(img));
-//				    		
-//				    	}catch(Exception ex) {}
-//						break;
-//					}
-//				}
-//				cp.card.show(cp, "DF");// 화면 이동 
-//			}
-//		}
+						try
+				    	{
+				    		URL url=new URL(m.getPoster());
+				    		Image img=NetworkMain.getImage(new ImageIcon(url), 350, 250);
+				    		cp.df.posterLa.setIcon(new ImageIcon(img));
+				    		
+				    	}catch(Exception ex) {}
+						break;
+					}
+				}
+				cp.card.show(cp, "DF");// 화면 이동 
+			}
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

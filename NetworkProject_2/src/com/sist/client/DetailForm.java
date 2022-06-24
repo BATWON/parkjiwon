@@ -7,6 +7,7 @@ import java.awt.event.*;
 public class DetailForm extends JPanel implements ActionListener{
    public ControllerPanel cp;
    JLabel posterLa=new JLabel();
+   JLabel name = new JLabel();
    JLabel address=new JLabel();
    JLabel tel=new JLabel();
    JLabel type=new JLabel();
@@ -23,20 +24,21 @@ public class DetailForm extends JPanel implements ActionListener{
 	   //setBackground(Color.cyan);
 //	   // 배치 
 	   setLayout(null);
-	   posterLa.setBounds(10, 15, 350, 250 );
-	   address.setBounds(365, 15, 400, 35);
-	   tel.setBounds(365, 55, 400, 35);
-	   type.setBounds(365, 95, 400, 35);
-	   price.setBounds(365, 135, 400, 35);
-	   parking.setBounds(365, 175, 400, 35);
-	   time.setBounds(365, 215, 400, 35);
-	   menu.setBounds(365, 255, 400, 35);
+	   posterLa.setBounds(10, 15, 350, 350 );
+	   name.setBounds(365, 15, 400, 35);
+	   address.setBounds(365, 55, 400, 35);
+	   tel.setBounds(365, 95, 400, 35);
+	   type.setBounds(365, 135, 400, 35);
+	   price.setBounds(365, 175, 400, 35);
+	   parking.setBounds(365, 215, 400, 35);
+	   time.setBounds(365, 255, 400, 35);
+	   menu.setBounds(365, 295, 400, 35);
 //	   movie.setVisible(false);
 	   JPanel p=new JPanel();
 	   p.add(b1);//p.add(b2);
-	   p.setBounds(365, 220, 400, 35);
+	   p.setBounds(365, 350, 400, 35);
 //	   
-	   add(posterLa);add(address);
+	   add(posterLa);add(name);add(address);
 	   add(tel);add(type);
 	   add(price);add(parking);
 	   add(time);add(menu);
