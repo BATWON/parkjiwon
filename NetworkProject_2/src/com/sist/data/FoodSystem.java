@@ -55,16 +55,24 @@ public class FoodSystem {
 		   }
 			
 
-public static int musicTotalPage()
-{
-	   return (int)(Math.ceil(10000/15.0));
-}
-public static void main(String[] args) {
-	   ArrayList<FoodLocationVO> list=foodListData(1);
-	   for(FoodLocationVO m:list)
-	   {
-		   System.out.println(m.getNo()+"."+m.getName());
-	   }
-	   
+	public static int musicTotalPage()
+	{
+		   return (int)(Math.ceil(10000/15.0));
+	}
+	public static void main(String[] args) {
+		   ArrayList<FoodLocationVO> list=foodListData(1);
+		   for(FoodLocationVO m:list)
+		   {
+			   System.out.println(m.getNo()+"."+m.getName());
+		   }
+		   
+		}
+	public static ArrayList<FoodLocationVO> foodTop10(){
+		   ArrayList<FoodLocationVO> tList = new ArrayList<FoodLocationVO>();
+		   for (int i=0; i<10; i++) {
+			   FoodLocationVO m = list.get(i);
+			   tList.add(m);
+		   }
+		   return tList;
 	}
 }

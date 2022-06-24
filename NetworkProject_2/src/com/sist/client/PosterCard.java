@@ -15,7 +15,8 @@ public class PosterCard extends JPanel{
     JLabel poster=new JLabel();
     JLabel name=new JLabel();
     JLabel address =new JLabel();
-    public PosterCard(FoodLocationVO m)
+    //FoodLocationVO m
+    public PosterCard()
     {
     	poster.setBorder(new LineBorder(Color.blue,2));
     	name.setBorder(new LineBorder(Color.red,1));
