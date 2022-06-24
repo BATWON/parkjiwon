@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.sist.client.ControllerPanel;
+import com.sist.client.LoginForm;
 import com.sist.client.MenuForm;
 import com.sist.client.WaitForm;
 import com.sist.data.FoodLocationVO;
@@ -21,6 +22,7 @@ public class NetworkMain extends JFrame implements ActionListener{
     MenuForm menu=new MenuForm();
     ControllerPanel cp=new ControllerPanel();
     WaitForm wr=new WaitForm();
+    LoginForm lf = new LoginForm();
     int curpage=1;
     int totalpage=0;
     int cno=1;
@@ -38,7 +40,7 @@ public class NetworkMain extends JFrame implements ActionListener{
     	add(wr);
     	
     	setSize(1250, 900);
-    	setVisible(true);
+//    	setVisible(true);
     	// 종료 
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	// 이벤트 등록 
