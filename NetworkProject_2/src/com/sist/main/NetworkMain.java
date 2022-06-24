@@ -16,8 +16,7 @@ import com.sist.client.MenuForm;
 import com.sist.client.WaitForm;
 import com.sist.data.FoodLocationVO;
 import com.sist.data.FoodSystem;
-//import com.sist.data.Music;
-//import com.sist.data.MusicSystem;
+
 public class NetworkMain extends JFrame implements ActionListener{
     MenuForm menu=new MenuForm();
     ControllerPanel cp=new ControllerPanel();
@@ -51,11 +50,6 @@ public class NetworkMain extends JFrame implements ActionListener{
     	cp.hf.b1.addActionListener(this);// 이전
     	cp.hf.b2.addActionListener(this);// 다음 
     	
-    	/*for(int i=0;i<cp.hf.mm.musics.length;i++)
-    	{
-    		cp.hf.mm.musics[i].addMouseListener(this);
-    	}*/
-    	
     	totalpage=FoodSystem.musicTotalPage();
     	cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
     	
@@ -82,55 +76,7 @@ public class NetworkMain extends JFrame implements ActionListener{
 		new NetworkMain();
 	}
 	// 버튼 클릭시 처리 => 구현이 안됨 => 클릭을 하면 자동 시스템(JVM)에 의핸 자동 호출 
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		// TODO Auto-generated method stub
-//		if(e.getSource()==cp.hf.b1)// 이전 
-//		{
-//			if(curpage>1)
-//			{
-//				curpage--;
-//				ArrayList<Music> list=
-//						   cp.hf.ms.musicListData(cno, curpage);
-//				
-//				cp.hf.mm.cardInit(list);
-//				cp.hf.mm.cardPrint(list);
-//				
-//				cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-//			}
-//		}
-//		else if(e.getSource()==cp.hf.b2) // 다음 
-//		{
-//			if(curpage<totalpage)
-//			{
-//				System.out.println("cno="+cno);
-//				curpage++;
-//				ArrayList<Music> list=
-//						   cp.hf.ms.musicListData(cno, curpage);
-//				
-//				cp.hf.mm.cardInit(list);
-//				cp.hf.mm.cardPrint(list);
-//				
-//				cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-//			}
-//		}
-//		for(int i=0;i<cp.hf.m.length;i++)
-//		{
-//			if(e.getSource()==cp.hf.m[i])
-//			{
-//				curpage=1;
-//				cno=i+1;
-//				//System.out.println("button Click:"+(i+1));
-//				ArrayList<Music> list=
-//						   cp.hf.ms.musicListData(cno, curpage);
-//				
-//				cp.hf.mm.cardInit(list);
-//				cp.hf.mm.cardPrint(list);
-//				
-//				cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-//			}
-//		}
-//	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -152,7 +98,6 @@ public class NetworkMain extends JFrame implements ActionListener{
 			{
 				if(curpage<totalpage)
 				{
-					System.out.println("cno="+cno);
 					curpage++;
 					ArrayList<FoodLocationVO> list=
 							   cp.hf.ms.foodListData(curpage);
@@ -194,13 +139,9 @@ public class NetworkMain extends JFrame implements ActionListener{
 						}
 				} catch(Exception ex) {}
 			}
-//			for(int i=0;i<cp.hf.m.length;i++)
-//			{
-//				if(e.getSource()==cp.hf.m[i])
-//				{
+
 					curpage=1;
-//					cno=i+1;
-					//System.out.println("button Click:"+(i+1));
+
 					ArrayList<FoodLocationVO> list=
 							   cp.hf.ms.foodListData(curpage);
 					
@@ -208,8 +149,7 @@ public class NetworkMain extends JFrame implements ActionListener{
 					cp.hf.mm.cardPrint(list);
 					
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-//				}
-//			}
+
 	}
 
 	

@@ -31,20 +31,13 @@ public class FoodSystem {
 					   new ArrayList<FoodLocationVO>();
 			   // 페이지 나누기 
 			   int j=0;
-			   // 100  115  130
-			   // 
+
 			   int pagecnt=(page*15)-15;
-			   /*
-			    *    list.size ==> 700  (0~699)
-			    *    cno  1 => 1
-			    *    cno  2 => 100
-			    *    cno  3 => 200
-			    *    cno  4 => 300...
-			    */
+
 			   for(int i=0;i<list.size();i++)
 			   {
 				   FoodLocationVO m=list.get(i);
-				     if(j<15)// && i>=(pagecnt+((cno-1)*100)))
+				     if(j<15)
 					 {
 						   cList.add(m);
 						   j++;
@@ -57,7 +50,7 @@ public class FoodSystem {
 
 	public static int musicTotalPage()
 	{
-		   return (int)(Math.ceil(10000/15.0));
+		   return (int)(Math.ceil(5000/15.0));
 	}
 	public static void main(String[] args) {
 		   ArrayList<FoodLocationVO> list=foodListData(1);

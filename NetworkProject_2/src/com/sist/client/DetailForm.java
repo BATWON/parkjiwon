@@ -19,9 +19,7 @@ public class DetailForm extends JPanel implements ActionListener{
    public DetailForm(ControllerPanel cp)
    {
 	   b1=new JButton("목록");
-//	   b2=new JButton("동영상");
 	   this.cp=cp;
-	   //setBackground(Color.cyan);
 //	   // 배치 
 	   setLayout(null);
 	   posterLa.setBounds(10, 15, 350, 350 );
@@ -35,17 +33,16 @@ public class DetailForm extends JPanel implements ActionListener{
 	   menu.setBounds(365, 295, 400, 35);
 //	   movie.setVisible(false);
 	   JPanel p=new JPanel();
-	   p.add(b1);//p.add(b2);
+	   p.add(b1);
 	   p.setBounds(365, 350, 400, 35);
 //	   
 	   add(posterLa);add(name);add(address);
 	   add(tel);add(type);
 	   add(price);add(parking);
 	   add(time);add(menu);
-	   add(p);//add(movie);
+	   add(p);
 //	   
 	   b1.addActionListener(this);
-//	   b2.addActionListener(this);
    }
 
 @Override
@@ -55,12 +52,6 @@ public class DetailForm extends JPanel implements ActionListener{
 		{
 			cp.card.show(cp,"HF");
 		}
-	//	else if(e.getSource()==b2)
-	//	{
-	//		try
-	//		{
-	//			Runtime.getRuntime().exec("\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe "
-	//					             +"http://youtube.com/embed/"+movie.getText());
-	//		}catch(Exception ex){}
+
 	}
 }

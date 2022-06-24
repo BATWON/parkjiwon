@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import com.sist.data.FoodLocationVO;
 import com.sist.data.FoodSystem;
 import com.sist.main.NetworkMain;
-//import com.sist.main.FoodMain;
 public class FoodManager extends JPanel implements MouseListener{
     public PosterCard[] foods=new PosterCard[15];
     public JPanel pan=new JPanel();
@@ -25,23 +24,18 @@ public class FoodManager extends JPanel implements MouseListener{
     public void cardPrint(ArrayList<FoodLocationVO> list)
     {
     	setLayout(null);
-    	//JPanel p=new JPanel();
     	pan.setLayout(new GridLayout(3,5));
     	int i=0;
     	for(FoodLocationVO m:list)
     	{
     		
     		foods[i]=new PosterCard(m);
-//        	foods[i].setOpaque(true);
-//        	foods[i].setBackground(Color.yellow);
     		pan.add(foods[i]);
     		foods[i].addMouseListener(this);
     		i++;
     	}
     	
     	pan.setBounds(10, 35, 840, 750);
-//    	pan.setOpaque(true);
-//    	pan.setBackground(Color.pink);
     	add(pan);
     	
     	
@@ -80,21 +74,6 @@ public class FoodManager extends JPanel implements MouseListener{
 						cp.df.parking.setText(m.getParking());
 						cp.df.time.setText(m.getTime());
 						cp.df.menu.setText(m.getMenu());
-//						String s="";
-//						if(m.getState().equals("유지"))
-//						{
-//							s="-";
-//						}
-//						else if(m.getState().equals("상승"))
-//						{
-//							s="▲"+m.getIdcrement();
-//						}
-//						else if(m.getState().equals("하강"))
-//						{
-//							s="▼"+m.getIdcrement();
-//						}
-//						cp.df.idcrement.setText(s);
-//						cp.df.movie.setText(m.getKey());
 						try
 				    	{
 				    		URL url=new URL(m.getPoster());
