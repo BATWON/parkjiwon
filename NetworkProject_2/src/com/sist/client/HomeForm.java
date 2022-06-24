@@ -33,7 +33,7 @@ public class HomeForm extends JPanel{
 
     	
     	// 배치 
-    	setLayout(null);
+//    	setLayout(null);
     	
 		setLayout(null);	// 직접 배치
 		tf.setBounds(10, 0, 200, 30);
