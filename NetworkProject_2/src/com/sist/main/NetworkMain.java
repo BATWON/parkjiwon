@@ -2,8 +2,13 @@ package com.sist.main;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,17 +19,22 @@ import com.sist.client.ControllerPanel;
 import com.sist.client.LoginForm;
 import com.sist.client.MenuForm;
 import com.sist.client.WaitForm;
+import com.sist.common.Function;
 import com.sist.data.FoodLocationVO;
 import com.sist.data.FoodSystem;
 
-public class NetworkMain extends JFrame implements ActionListener{
+public class NetworkMain extends JFrame implements ActionListener, Runnable{
     MenuForm menu=new MenuForm();
     ControllerPanel cp=new ControllerPanel();
     WaitForm wr=new WaitForm();
-//    LoginForm lf = new LoginForm();
+    LoginForm lf = new LoginForm();
     int curpage=1;
     int totalpage=0;
-    int cno=1;
+//    int cno=1;
+    Socket s;
+    BufferedReader in;	// 쓰레드
+    OutputStream out; // 일반 유저
+    
     public NetworkMain()
     {
     	setTitle("네트워크 맛집 프로그램");
@@ -50,7 +60,7 @@ public class NetworkMain extends JFrame implements ActionListener{
     	cp.hf.b1.addActionListener(this);// 이전
     	cp.hf.b2.addActionListener(this);// 다음 
     	
-    	totalpage=FoodSystem.musicTotalPage();
+    	totalpage=FoodSystem.foodTotalPage();
     	cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
     	
     	// 1. menu 클릭
@@ -61,6 +71,10 @@ public class NetworkMain extends JFrame implements ActionListener{
     	menu.foodBtn.addActionListener(this);
     	
     	cp.mf.btn.addActionListener(this);
+    	
+    	// 로그인 처리
+    	lf.b1.addActionListener(this);
+    	lf.b2.addActionListener(this);
     }
     public static Image getImage(ImageIcon ii,int width,int height)
     {
@@ -93,12 +107,56 @@ public class NetworkMain extends JFrame implements ActionListener{
 					
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
 				}
-			}
-			else if(e.getSource()==cp.hf.b2) // 다음 
-			{
+			} else if (e.getSource()==lf.b1) {	// 로그인 처리
+				// id
+				String id = lf.tf1.getText();
+				if (id.length()<1) {
+					// alert("ID를 입력하세요")
+					JOptionPane.showMessageDialog(this, "ID를 입력하세요");
+					lf.tf1.requestFocus();
+					return;
+				}
+				// name ==> 반드시 입력 => 유효성 검사 => JQuery
+				// => 기본 (보안) => Spring Security
+				String name = lf.tf2.getText();
+				if (id.length()<1) {
+					// alert("ID를 입력하세요")
+					JOptionPane.showMessageDialog(this, "이름을 입력하세요");
+					lf.tf2.requestFocus();
+					return;
+				}
+				// 성별
+				String sex="";
+				if (lf.rb1.isSelected()) {	// 남자 버튼 클릭
+					sex="남자";
+				} else {
+					sex="여자";
+				}
+				
+				// 서버 연결
+				try {
+					s = new Socket("183.98.140.90",3355);
+					in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+					// 서버가 보내준 데이터 저장된 위치
+					
+					out = s.getOutputStream();	// 보내는 위치
+					
+					// 로그인 요청
+					out.write((Function.LOGIN+"|"+id+"|"+name+"|"+sex+"\n").getBytes());
+				} catch(Exception ex) {}
+				
+				// 서버에서 들어오는 데이터 읽어서 출력
+				new Thread(this).start();
+				
+			} else if (e.getSource()==lf.b2) {
+				System.exit(0);	// 정상 종료
+			} else if(e.getSource()==cp.hf.b2) { 	// 다음 
 				if(curpage<totalpage)
 				{
 					curpage++;
+					System.out.println(curpage);
+//					System.out.println(cp.hf.ms.foodListData(1));
+//					System.out.println(cp.hf.ms.foodListData(curpage));
 					ArrayList<FoodLocationVO> list=
 							   cp.hf.ms.foodListData(curpage);
 					
@@ -107,6 +165,8 @@ public class NetworkMain extends JFrame implements ActionListener{
 					
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
 				}
+			} else if (e.getSource()==menu.chatBtn) {
+				cp.card.show(cp, "CF");
 			} else if (e.getSource()==menu.exitBtn) {
 				System.exit(0);
 			} else if (e.getSource()==menu.foodBtn) {
@@ -150,8 +210,44 @@ public class NetworkMain extends JFrame implements ActionListener{
 					
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
 
-	}
-
+		}
 	
 
+//}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			while(true) {
+				// 서버에서 보내주는 데이터 받기
+				String msg = in.readLine();
+				StringTokenizer st = new StringTokenizer(msg,"|");
+				int protocol = Integer.parseInt(st.nextToken());
+				switch(protocol) {
+					case Function.LOGIN: {
+						String[] data = {
+							st.nextToken(),	// ID
+							st.nextToken(), // Name
+							st.nextToken()	// 성별
+						};
+						cp.cf.model.addRow(data);
+					}
+						break;
+					case Function.MYLOG: {
+						lf.setVisible(false);	// 로그인 종료
+						setVisible(true);		// 메인창
+					}
+						break;
+					case Function.CHAT:
+						break;
+					case Function.SEND:
+						break;
+					case Function.END:
+						break;
+					case Function.MYEND:
+						break;
+				}
+			}
+		} catch(Exception ex) {}
+	}
 }

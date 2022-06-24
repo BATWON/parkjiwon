@@ -37,7 +37,7 @@ public class FoodSystem {
 			   for(int i=0;i<list.size();i++)
 			   {
 				   FoodLocationVO m=list.get(i);
-				     if(j<15)
+				     if(j<15 && i>=pagecnt)
 					 {
 						   cList.add(m);
 						   j++;
@@ -48,7 +48,7 @@ public class FoodSystem {
 		   }
 			
 
-	public static int musicTotalPage()
+	public static int foodTotalPage()
 	{
 		   return (int)(Math.ceil(5000/15.0));
 	}
