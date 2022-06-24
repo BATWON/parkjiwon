@@ -71,7 +71,7 @@ public class WaitForm extends JPanel{
        	try {
     		ArrayList<FoodLocationVO> list = FoodSystem.foodTop10();
     		for(FoodLocationVO m:list) {
-    			URL url = new URL("http:"+m.getPoster());
+    			URL url = new URL(m.getPoster());
     			Image img = NetworkMain.getImage(new ImageIcon(url), 50, 45);
     			Object[] data = {
     				new ImageIcon(img),

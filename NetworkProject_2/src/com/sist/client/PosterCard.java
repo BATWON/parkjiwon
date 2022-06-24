@@ -16,7 +16,7 @@ public class PosterCard extends JPanel{
     JLabel name=new JLabel();
     JLabel address =new JLabel();
     //FoodLocationVO m
-    public PosterCard()
+    public PosterCard(FoodLocationVO m)
     {
     	poster.setBorder(new LineBorder(Color.blue,2));
     	name.setBorder(new LineBorder(Color.red,1));
@@ -28,7 +28,7 @@ public class PosterCard extends JPanel{
     	try
     	{
     		
-    		URL url=new URL("");
+    		URL url=new URL(m.getPoster());
     		Image img=NetworkMain.getImage(new ImageIcon(url), 168, 170);
     		poster.setIcon(new ImageIcon(img));
     	}catch(Exception ex) {}

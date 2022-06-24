@@ -27,7 +27,7 @@ public class FoodManager extends JPanel implements MouseListener{
     	for(FoodLocationVO m:list)
     	{
     		
-    		foods[i]=new PosterCard();
+    		foods[i]=new PosterCard(m);
         	foods[i].setOpaque(true);
         	foods[i].setBackground(Color.yellow);
     		pan.add(foods[i]);
