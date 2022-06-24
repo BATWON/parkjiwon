@@ -49,13 +49,17 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     	add(wr);
     	
     	setSize(1250, 900);
-    	setVisible(true);
+//    	setVisible(true);
     	// 종료 
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	// 이벤트 등록 
     	
     		cp.hf.m.addActionListener(this);
     	
+//        for(int i=0;i<cp.hf.m.length;i++)
+//        {
+//        	cp.hf.m[i].addActionListener(this);
+//        }
     	
     	cp.hf.b1.addActionListener(this);// 이전
     	cp.hf.b2.addActionListener(this);// 다음 
@@ -75,6 +79,9 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     	// 로그인 처리
     	lf.b1.addActionListener(this);
     	lf.b2.addActionListener(this);
+    	
+    	// 채팅
+    	cp.cf.tf.addActionListener(this);
     }
     public static Image getImage(ImageIcon ii,int width,int height)
     {
@@ -120,7 +127,7 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 				// => 기본 (보안) => Spring Security
 				String name = lf.tf2.getText();
 				if (id.length()<1) {
-					// alert("ID를 입력하세요")
+					// alert("이름을 입력하세요")
 					JOptionPane.showMessageDialog(this, "이름을 입력하세요");
 					lf.tf2.requestFocus();
 					return;
@@ -165,10 +172,22 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 					
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
 				}
+			} else if (e.getSource()==cp.cf.tf) {
+				// 1. 채팅 문자열 읽기
+				String msg = cp.cf.tf.getText();
+				if(msg.length()<1) 
+					return;
+				try {
+					out.write((Function.CHAT+"|"+msg+"\n").getBytes());
+				} catch(Exception ex) {}
+				cp.cf.tf.setText("");
 			} else if (e.getSource()==menu.chatBtn) {
 				cp.card.show(cp, "CF");
 			} else if (e.getSource()==menu.exitBtn) {
-				System.exit(0);
+				try {
+					out.write((Function.END+"|\n").getBytes());
+				} catch(Exception ex) {}
+
 			} else if (e.getSource()==menu.foodBtn) {
 				cp.card.show(cp, "MF");
 			} else if (e.getSource()==menu.homeBtn) {
@@ -238,13 +257,26 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 						setVisible(true);		// 메인창
 					}
 						break;
-					case Function.CHAT:
+					case Function.CHAT: {
+						cp.cf.ta.append(st.nextToken()+"\n");
+					}
 						break;
 					case Function.SEND:
 						break;
-					case Function.END:
+					case Function.END: {
+						String myId = st.nextToken();
+						for(int i=0; i<cp.cf.model.getRowCount(); i++) {
+							String you = cp.cf.model.getValueAt(i, 0).toString();
+							if(myId.equals(you)) {
+								cp.cf.model.removeRow(i);
+								break;
+							}
+						}
+					}
 						break;
-					case Function.MYEND:
+					case Function.MYEND: {
+						System.exit(0);
+					}
 						break;
 				}
 			}

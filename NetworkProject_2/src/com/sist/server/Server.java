@@ -4,6 +4,7 @@ import java.io.*;	// 통신
 import java.util.*;	// StringTokenizer
 
 import com.sist.common.Function;
+import com.sist.server.Server.Client;
 
 import java.net.*;	// 네트워크
 
@@ -47,13 +48,16 @@ public class Server implements Runnable {
 			// 클라이언트에 대한 정보 (IP, PORT => Socket)
 			// s는 클라이언트 정보 
 			// s => Thread에 전송 후 통신이 가능하게 만든다
+				Client client = new Client(s);
+				client.start();
 			}
 		} catch(Exception ex) {}
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Server server = new Server();
+		new Thread(server).start();
 	}
 	
 	class Client extends Thread {
@@ -85,13 +89,47 @@ public class Server implements Runnable {
 					StringTokenizer st = new StringTokenizer(msg, "|");
 					int protocol = Integer.parseInt(st.nextToken());
 					switch(protocol) {
-						case Function.LOGIN:
+						case Function.LOGIN: {
+							id = st.nextToken();
+							name = st.nextToken();
+							sex = st.nextToken();
+							
+							// 접속된 모든 사람에게 전송
+							// 로그인 된 사람
+							messageAll(Function.LOGIN+"|"+id+"|"+name+"|"+sex);
+							
+							// 저장
+							waitVc.add(this);
+							
+							// 로그인 하는 사람
+							messageTo(Function.MYLOG+"|"+name);
+							for(Client client:waitVc) {
+								messageTo(Function.LOGIN+"|"
+										+client.id+"|"
+										+client.name+"|"
+										+client.sex);
+							}
+						}
 							break;
-						case Function.CHAT:
+						case Function.CHAT: {
+							messageAll(Function.CHAT+"|["+name+"]"+st.nextToken());
+						}
 							break;
 						case Function.SEND:
 							break;
-						case Function.END:
+						case Function.END: {
+							messageAll(Function.END+"|"+id);
+							for (int i=0; i<waitVc.size(); i++) {
+								Client c = waitVc.get(i);
+								if (id.equals(c.id)) {
+									messageTo(Function.MYEND+"|");
+									waitVc.remove(i);
+									in.close();
+									out.close();
+									break;
+								}
+							}
+						}
 							break;
 					}
 				}
