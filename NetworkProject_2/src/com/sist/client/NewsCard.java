@@ -8,7 +8,7 @@ public class NewsCard extends JPanel {
 	public JTextArea ta;
 	public NewsCard() {
 		la = new JLabel("");
-		la.setForeground(Color.magenta);
+		la.setForeground(Color.red);
 		ta = new JTextArea();
 		
 		setLayout(null);

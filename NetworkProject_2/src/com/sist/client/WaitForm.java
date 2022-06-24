@@ -1,10 +1,13 @@
 package com.sist.client;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,10 +21,10 @@ import com.sist.main.NetworkMain;
 public class WaitForm extends JPanel{
 	JTable table;
 	DefaultTableModel model;
+	JLabel la = new JLabel("Top 10 맛집");
 
     public WaitForm()
     {
-
     	String[] col={"","Name"};
     	Object[][] row=new Object[0][3];
     	model=new DefaultTableModel(row,col) {	// 익명의 클래스 => 상속없이 오버라이딩
@@ -50,6 +53,11 @@ public class WaitForm extends JPanel{
 
     	js1.setBounds(0, 100 , 250, 500);
     	add(js1);
+    	
+//		setLayout(new BorderLayout());
+		la.setBounds(70, 50, 250, 30);
+		la.setFont(new Font("돋움체",Font.BOLD,20));
+		add("North",la);
     	
        	try {
     		ArrayList<FoodLocationVO> list = FoodSystem.foodTop10();

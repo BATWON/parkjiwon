@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import com.sist.data.FoodLocationVO;
 import com.sist.data.FoodSystem;
@@ -18,15 +20,29 @@ public class HomeForm extends JPanel{
     public FoodManager mm;
     public FoodSystem ms=new FoodSystem();
     public JLabel pagLa=new JLabel("0 page / 0 pages");
+    
+    
     public HomeForm(ControllerPanel cp)
     {
     	mm=new FoodManager(cp);
     	b1=new JButton("이전");
     	b2=new JButton("다음");
+    	
+		tf=new JTextField();
+		btn = new JButton("검색");
 
     	
     	// 배치 
     	setLayout(null);
+    	
+		setLayout(null);	// 직접 배치
+		tf.setBounds(10, 0, 200, 30);
+		btn.setBounds(215, 0, 100, 30);
+//		js.setBounds(10, 55, 800, 500);
+		
+		add(tf);
+		add(btn);
+//		add(js);
 
     	mm.setBounds(0,0, 840, 780);
     	add(mm);
