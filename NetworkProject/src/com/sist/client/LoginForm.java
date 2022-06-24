@@ -20,6 +20,8 @@ public class LoginForm extends JFrame {
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(rb1); bg.add(rb2);
 		
+		rb1.setSelected(true);
+		
 		b1 = new JButton("로그인");
 		b2 = new JButton("취소");
 		
@@ -31,7 +33,7 @@ public class LoginForm extends JFrame {
 		la2.setBounds(10, 50, 40, 30);
 		tf2.setBounds(55, 50, 150, 30);
 		
-		la3.setBounds(10, 50, 40, 30);
+		la3.setBounds(10, 85, 40, 30);
 		rb1.setBounds(55, 85, 70, 30);
 		rb2.setBounds(130, 85, 70, 30);
 		
