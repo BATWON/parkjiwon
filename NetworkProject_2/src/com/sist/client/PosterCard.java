@@ -1,5 +1,5 @@
 package com.sist.client;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.Image;
 import java.net.URL;
 
@@ -36,11 +36,11 @@ public class PosterCard extends JPanel{
     	name.setBounds(5,180, 165, 30);
     	name.setOpaque(true);
     	name.setBackground(Color.orange);
-//    	name.setText(m.getName());
+    	name.setText(m.getName());
     	address.setBounds(5, 215 , 165, 30);
     	address.setOpaque(true);
     	address.setBackground(Color.cyan);
-//    	address.setText(m.getAddress());
+    	address.setText(m.getAddress());
     	add(poster);
     	add(name);
     	add(address);

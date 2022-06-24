@@ -2,7 +2,7 @@ package com.sist.client;
 import java.awt.*;
 import javax.swing.*;
 public class MenuForm extends JPanel{
-     JButton homeBtn,foodBtn,chatBtn,exitBtn,newsBtn;
+     public JButton homeBtn,foodBtn,chatBtn,exitBtn,newsBtn;
      // 초기화 
      public MenuForm()
      {

@@ -67,6 +67,17 @@ public class FoodSystem {
 		   }
 		   
 		}
+	
+	   public static ArrayList<FoodLocationVO> foodFind(String fd){
+		   ArrayList<FoodLocationVO> fList = new ArrayList<FoodLocationVO>();
+		   for (FoodLocationVO m:list) {
+			   if(m.getName().contains(fd)) {
+				   fList.add(m);
+			   }
+		   }
+		   return fList;
+	   }
+	
 	public static ArrayList<FoodLocationVO> foodTop10(){
 		   ArrayList<FoodLocationVO> tList = new ArrayList<FoodLocationVO>();
 		   for (int i=0; i<10; i++) {

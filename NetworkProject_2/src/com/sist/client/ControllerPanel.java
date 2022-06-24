@@ -4,9 +4,10 @@ import java.awt.*;
 
 import javax.swing.*;
 public class ControllerPanel extends JPanel{
-	CardLayout card=new CardLayout();
+	public CardLayout card=new CardLayout();
 	public HomeForm hf;
 	public DetailForm df;
+	public FoodFindForm mf = new FoodFindForm();
     public ControllerPanel()
     {
     	hf=new HomeForm(this);
@@ -14,6 +15,7 @@ public class ControllerPanel extends JPanel{
     	setLayout(card);
     	add("HF",hf);
     	add("DF",df);
+    	add("MF",mf);
     }
     
 }

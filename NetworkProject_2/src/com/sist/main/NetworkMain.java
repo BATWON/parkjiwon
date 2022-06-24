@@ -2,10 +2,12 @@ package com.sist.main;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.sist.client.ControllerPanel;
@@ -13,6 +15,8 @@ import com.sist.client.MenuForm;
 import com.sist.client.WaitForm;
 import com.sist.data.FoodLocationVO;
 import com.sist.data.FoodSystem;
+//import com.sist.data.Music;
+//import com.sist.data.MusicSystem;
 public class NetworkMain extends JFrame implements ActionListener{
     MenuForm menu=new MenuForm();
     ControllerPanel cp=new ControllerPanel();
@@ -52,6 +56,15 @@ public class NetworkMain extends JFrame implements ActionListener{
     	
     	totalpage=FoodSystem.musicTotalPage();
     	cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
+    	
+    	// 1. menu 클릭
+    	menu.chatBtn.addActionListener(this);
+    	menu.exitBtn.addActionListener(this);
+    	menu.homeBtn.addActionListener(this);
+    	menu.newsBtn.addActionListener(this);
+    	menu.foodBtn.addActionListener(this);
+    	
+    	cp.mf.btn.addActionListener(this);
     }
     public static Image getImage(ImageIcon ii,int width,int height)
     {
@@ -133,21 +146,52 @@ public class NetworkMain extends JFrame implements ActionListener{
 					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
 				}
 			}
-//			else if(e.getSource()==cp.hf.b2) // 다음 
-//			{
-//				if(curpage<totalpage)
-//				{
-//					System.out.println("cno="+cno);
-//					curpage++;
-//					ArrayList<FoodHouseVO> list=
-//							   cp.hf.ms.foodListData(curpage);
-//					
-//					cp.hf.mm.cardInit(list);
-//					cp.hf.mm.cardPrint(list);
-//					
-//					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-//				}
-//			}
+			else if(e.getSource()==cp.hf.b2) // 다음 
+			{
+				if(curpage<totalpage)
+				{
+					System.out.println("cno="+cno);
+					curpage++;
+					ArrayList<FoodLocationVO> list=
+							   cp.hf.ms.foodListData(curpage);
+					
+					cp.hf.mm.cardInit(list);
+					cp.hf.mm.cardPrint(list);
+					
+					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
+				}
+			} else if (e.getSource()==menu.exitBtn) {
+				System.exit(0);
+			} else if (e.getSource()==menu.foodBtn) {
+				cp.card.show(cp, "MF");
+			} else if (e.getSource()==menu.homeBtn) {
+				cp.card.show(cp, "HF");
+			} else if (e.getSource()==cp.mf.btn) {	// 검색 버튼 클릭시
+				// 1. 입력값 읽어오기
+				String fd = cp.mf.tf.getText();
+				if (fd.length()<1) {	// 입력이 안 된 상태
+					JOptionPane.showMessageDialog(this, "검색어를 입력하세요");
+					cp.mf.tf.requestFocus();
+					return;
+				}
+				ArrayList<FoodLocationVO> fList = FoodSystem.foodFind(fd);
+				for(int i=cp.mf.model.getRowCount()-1; i>=0; i--) {	// 출력된 내용 지우기
+					cp.mf.model.removeRow(i);
+				}	// 밑에서부터 지우기
+				try {
+						for (FoodLocationVO m:fList) {
+							URL url = new URL(m.getPoster());
+							Image img = getImage(new ImageIcon(url), 35, 30);
+							Object[] data = {
+									m.getNo(),
+									new ImageIcon(img),
+									m.getName(),
+									m.getAddress()
+							};
+							cp.mf.model.addRow(data);
+						}
+				} catch(Exception ex) {}
+			}
 //			for(int i=0;i<cp.hf.m.length;i++)
 //			{
 //				if(e.getSource()==cp.hf.m[i])
