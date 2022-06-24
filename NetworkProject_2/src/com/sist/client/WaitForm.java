@@ -65,7 +65,7 @@ public class WaitForm extends JPanel{
 //    	tf.setBounds(0, 270, 250, 30);
 //    	add(tf);
     	
-    	js1.setBounds(0, 320 , 250, 250);
+    	js1.setBounds(0, 100 , 250, 500);
     	add(js1);
     	
        	try {
