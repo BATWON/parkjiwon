@@ -36,8 +36,8 @@ public class FoodManager extends JPanel implements MouseListener{
     	}
     	
     	pan.setBounds(10, 35, 840, 750);
-    	pan.setOpaque(true);
-    	pan.setBackground(Color.pink);
+//    	pan.setOpaque(true);
+//    	pan.setBackground(Color.pink);
     	add(pan);
     	
     	
