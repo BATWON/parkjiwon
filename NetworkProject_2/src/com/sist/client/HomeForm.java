@@ -25,8 +25,9 @@ public class HomeForm extends JPanel{
     	b2=new JButton("다음");
 //    	JPanel p=new JPanel();
 //    	String title="검색하기";
-    	tf=new JTextField();
-		btn = new JButton("검색");
+
+    	//tf=new JTextField();
+		//btn = new JButton("검색");
     	
 //    		m=new JButton(title);
 //    		p.add(m);
@@ -38,12 +39,12 @@ public class HomeForm extends JPanel{
 //    	p.setBackground(Color.orange);
 //    	add(p);
 //    	setLayout(null);	// 직접 배치
-		tf.setBounds(10, 15, 200, 30);
-		btn.setBounds(215, 15, 100, 30);
+		//tf.setBounds(10, 15, 200, 30);
+		//btn.setBounds(215, 15, 100, 30);
 //		js.setBounds(10, 55, 800, 500);
 		
-		add(tf);
-		add(btn);
+		//add(tf);
+		//add(btn);
 //		add(js);
 		
 		

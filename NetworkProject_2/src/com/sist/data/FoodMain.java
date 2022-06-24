@@ -534,11 +534,20 @@ public class FoodMain {
             	System.out.println("==============================");
             	k++;
             }
+            
+            ArrayList<FoodLocationVO> list2 = 
+            		new ArrayList<FoodLocationVO>();
+            for(int i=0; i<list.size();i++) {
+            	FoodLocationVO vo = list.get(i);
+            	if(i%2==0) {
+            		list2.add(vo);
+            	}
+            }
             FileOutputStream fos=
             		new FileOutputStream("c:\\java_data\\food.txt");
             ObjectOutputStream oos=
             		new ObjectOutputStream(fos);
-            oos.writeObject(list);
+            oos.writeObject(list2);
             oos.close();
             fos.close();
 		}catch(Exception ex){}

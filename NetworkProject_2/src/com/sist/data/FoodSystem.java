@@ -41,16 +41,16 @@ public class FoodSystem {
 			    *    cno  3 => 200
 			    *    cno  4 => 300...
 			    */
-//			   for(int i=0;i<list.size();i++)
-//			   {
-//				   FoodHouseVO m=list.get(i);
-////				     if(j<15 && i>=(pagecnt+((cno-1)*100)))
-////					 {
-////						   cList.add(m);
-////						   j++;
-////					 }
+			   for(int i=0;i<list.size();i++)
+			   {
+				   FoodLocationVO m=list.get(i);
+				     if(j<15)// && i>=(pagecnt+((cno-1)*100)))
+					 {
+						   cList.add(m);
+						   j++;
+					 }
 				  
-//			   }
+			   }
 			   return cList;
 		   }
 			

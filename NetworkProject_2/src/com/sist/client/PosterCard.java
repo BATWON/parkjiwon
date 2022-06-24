@@ -18,13 +18,13 @@ public class PosterCard extends JPanel{
     //FoodLocationVO m
     public PosterCard(FoodLocationVO m)
     {
-    	poster.setBorder(new LineBorder(Color.blue,2));
-    	name.setBorder(new LineBorder(Color.red,1));
-    	address.setBorder(new LineBorder(Color.red,1));
+//    	poster.setBorder(new LineBorder(Color.blue,2));
+//    	name.setBorder(new LineBorder(Color.red,1));
+//    	address.setBorder(new LineBorder(Color.red,1));
     	setLayout(null);
     	poster.setBounds(5,5,165,170);
-    	poster.setOpaque(true);
-    	poster.setBackground(Color.pink);
+//    	poster.setOpaque(true);
+//    	poster.setBackground(Color.pink);
     	try
     	{
     		
@@ -34,12 +34,12 @@ public class PosterCard extends JPanel{
     	}catch(Exception ex) {}
     	
     	name.setBounds(5,180, 165, 30);
-    	name.setOpaque(true);
-    	name.setBackground(Color.orange);
+//    	name.setOpaque(true);
+//    	name.setBackground(Color.orange);
     	name.setText(m.getName());
     	address.setBounds(5, 215 , 165, 30);
-    	address.setOpaque(true);
-    	address.setBackground(Color.cyan);
+//    	address.setOpaque(true);
+//    	address.setBackground(Color.cyan);
     	address.setText(m.getAddress());
     	add(poster);
     	add(name);

@@ -28,8 +28,8 @@ public class FoodManager extends JPanel implements MouseListener{
     	{
     		
     		foods[i]=new PosterCard(m);
-        	foods[i].setOpaque(true);
-        	foods[i].setBackground(Color.yellow);
+//        	foods[i].setOpaque(true);
+//        	foods[i].setBackground(Color.yellow);
     		pan.add(foods[i]);
     		foods[i].addMouseListener(this);
     		i++;
