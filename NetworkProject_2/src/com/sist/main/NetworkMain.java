@@ -30,6 +30,7 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     LoginForm lf = new LoginForm();
     int curpage=1;
     int totalpage=0;
+    int cno=1;
 //    int cno=1;
     Socket s;
     BufferedReader in;	// 쓰레드
@@ -48,11 +49,11 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     	wr.setBounds(980, 15, 250, 700);
     	add(wr);
     	
-    	setSize(1250, 900);
+    	setSize(1250, 960);
 //    	setVisible(true);
     	// 종료 
-//     	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
+    	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//    	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	// 이벤트 등록 
     	
     		cp.hf.m.addActionListener(this);
@@ -83,6 +84,10 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     	
     	// 채팅
     	cp.cf.tf.addActionListener(this);
+    	cp.cf.b1.addActionListener(this);
+    	cp.cf.b2.addActionListener(this);
+    	
+//    	cp.nf.b.addActionListener(this);
     }
     public static Image getImage(ImageIcon ii,int width,int height)
     {
@@ -108,7 +113,7 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 				{
 					curpage--;
 					ArrayList<FoodLocationVO> list=
-							   cp.hf.ms.foodListData(curpage);
+							   cp.hf.ms.foodListData(cno, curpage);
 					
 					cp.hf.mm.cardInit(list);
 					cp.hf.mm.cardPrint(list);
@@ -166,7 +171,7 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 //					System.out.println(cp.hf.ms.foodListData(1));
 //					System.out.println(cp.hf.ms.foodListData(curpage));
 					ArrayList<FoodLocationVO> list=
-							   cp.hf.ms.foodListData(curpage);
+							   cp.hf.ms.foodListData(cno, curpage);
 					
 					cp.hf.mm.cardInit(list);
 					cp.hf.mm.cardPrint(list);
@@ -220,19 +225,23 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
 							cp.mf.model.addRow(data);
 						}
 				} catch(Exception ex) {}
-			}
+			} 
+			
+			else if(e.getSource()==cp.hf.m)
+            {
+               curpage++;
+               
+               ArrayList<FoodLocationVO> list=
+                        cp.hf.ms.foodListData(cno, curpage);
+               
+               cp.hf.mm.cardInit(list);
+               cp.hf.mm.cardPrint(list);
+               
+               cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
+            }
+         }
 
-					curpage=1;
 
-					ArrayList<FoodLocationVO> list=
-							   cp.hf.ms.foodListData(curpage);
-					
-					cp.hf.mm.cardInit(list);
-					cp.hf.mm.cardPrint(list);
-					
-					cp.hf.pagLa.setText(curpage+ " page / "+totalpage+" pages");
-
-		}
 	
 
 //}
