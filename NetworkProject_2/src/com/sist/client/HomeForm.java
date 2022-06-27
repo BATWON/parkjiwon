@@ -16,6 +16,7 @@ public class HomeForm extends JPanel{
 	public JTextField tf;
 	public JButton btn;
     public JButton b1,b2; // 이전 , 다음 
+//    public JButton[] m=new JButton[7];
     public JButton m=new JButton();
     public FoodManager mm;
     public FoodSystem ms=new FoodSystem();
