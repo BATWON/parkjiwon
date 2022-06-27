@@ -39,10 +39,10 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     {
     	setTitle("네트워크 맛집 프로그램");
     	setLayout(null);// 사용자 정의 (직접 배치)
-    	menu.setBounds(10, 15, 100, 350);
+    	menu.setBounds(120, 15, 960, 40);
     	add(menu);
     	
-    	cp.setBounds(120, 15, 850, 820);
+    	cp.setBounds(120, 65, 850, 820);
     	add(cp);
 //    	
     	wr.setBounds(980, 15, 250, 700);
