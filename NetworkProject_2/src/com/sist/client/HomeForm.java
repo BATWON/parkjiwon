@@ -57,7 +57,7 @@ public class HomeForm extends JPanel{
     	add(p1);
     	
     	// 시작과 동시에 데이터를 받기 
-    	ArrayList<FoodLocationVO> list=FoodSystem.foodListData(1);
+    	ArrayList<FoodLocationVO> list=FoodSystem.foodListData(1, 1);
     	mm.cardPrint(list);
     	
     }
