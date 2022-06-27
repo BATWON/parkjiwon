@@ -6,7 +6,7 @@ public class MenuForm extends JPanel{
      // 초기화 
      public MenuForm()
      {
-    	 setLayout(new GridLayout(5,1,10,10));
+    	 setLayout(new GridLayout(1,5,10,10));
     	 homeBtn=new JButton("홈");
     	 // <input type=button value="홈">
     	 foodBtn=new JButton("맛집");
