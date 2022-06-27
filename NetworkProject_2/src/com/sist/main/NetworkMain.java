@@ -51,7 +51,8 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable{
     	setSize(1250, 900);
 //    	setVisible(true);
     	// 종료 
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+//     	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);    
     	// 이벤트 등록 
     	
     		cp.hf.m.addActionListener(this);
