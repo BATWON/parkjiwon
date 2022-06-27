@@ -25,7 +25,7 @@ public class FoodSystem {
 	   public static ArrayList<FoodLocationVO> getList() {
 			  return list;
 		    }
-			public static ArrayList<FoodLocationVO> foodListData(int page)
+			public static ArrayList<FoodLocationVO> foodListData(int cno, int page)
 		    {
 			   ArrayList<FoodLocationVO> cList=
 					   new ArrayList<FoodLocationVO>();
@@ -53,7 +53,7 @@ public class FoodSystem {
 		   return (int)(Math.ceil(5000/15.0));
 	}
 	public static void main(String[] args) {
-		   ArrayList<FoodLocationVO> list=foodListData(1);
+		   ArrayList<FoodLocationVO> list=foodListData(334, 3);
 		   for(FoodLocationVO m:list)
 		   {
 			   System.out.println(m.getNo()+"."+m.getName());
