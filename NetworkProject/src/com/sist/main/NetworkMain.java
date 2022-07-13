@@ -145,7 +145,7 @@ public class NetworkMain extends JFrame implements ActionListener, Runnable {
 			
 			// 서버 연결
 			try {
-				s = new Socket("183.98.140.90",3355);
+				s = new Socket("localhost",3355);
 				in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 				// 서버가 보내준 데이터 저장된 위치
 				
